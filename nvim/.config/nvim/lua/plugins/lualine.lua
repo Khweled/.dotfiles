@@ -127,7 +127,7 @@ ins_left({
 
 ins_left({
   "filename",
-  file_status = true,    -- Displays file status (readonly status, modified status)
+  file_status = false,    -- Displays file status (readonly status, modified status)
   newfile_status = false, -- Display new file status (new file means no write after created)
   path = 1,              -- 0: Just the filename
   symbols = {
@@ -146,21 +146,21 @@ ins_left({
   color = { fg = colors.green },
 })
 
-ins_left({
-  "diff",
-  symbols = { added = " ", modified = " ", removed = " " },
-  diff_color = {
-    added = { fg = colors.green },
-    modified = { fg = colors.cyan },
-    removed = { fg = colors.red },
-  },
-})
+--ins_left({
+--  "diff",
+--  symbols = { added = " ", modified = " ", removed = " " },
+--  diff_color = {
+--    added = { fg = colors.green },
+--    modified = { fg = colors.cyan },
+--    removed = { fg = colors.red },
+--  },
+--})
 
-ins_left({
-  -- filesize component
-  "filesize",
-  cond = conditions.buffer_not_empty,
-})
+--ins_left({
+--  -- filesize component
+--  "filesize",
+--  cond = conditions.buffer_not_empty,
+--})
 
 ins_left({
   "diagnostics",
@@ -180,16 +180,16 @@ ins_left({
 --  color = { fg = colors.fg, gui = "bold" },
 --})
 
-ins_right({
-  "fileformat",
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-  color = { fg = colors.fg, gui = "bold" },
-})
+--ins_right({
+--  "fileformat",
+--  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+--  color = { fg = colors.fg, gui = "bold" },
+--})
 
-ins_right({
-  "filetype",
-  color = { fg = colors.fg, gui = "bold" },
-})
+--ins_right({
+--  "filetype",
+--  color = { fg = colors.fg, gui = "bold" },
+--})
 
 ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
 

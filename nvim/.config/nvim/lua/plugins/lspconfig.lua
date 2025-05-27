@@ -18,7 +18,7 @@ return {
 
                 -- keymaps
                 opts.desc = "Show LSP references"
-                vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+                vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
                 opts.desc = "Go to declaration"
                 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
@@ -30,13 +30,16 @@ return {
                 vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
 
                 opts.desc = "Show LSP type definitions"
-                vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+                vim.keymap.set("n", "go", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
 
                 opts.desc = "See available code actions"
                 vim.keymap.set({ "n", "v" }, "<leader>ca", function() vim.lsp.buf.code_action() end, opts) -- see available code actions, in visual mode will apply to selection
 
                 opts.desc = "Smart rename"
                 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+
+                opts.desc = "Signature Help"
+                vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
                 opts.desc = "Show buffer diagnostics"
                 vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
@@ -51,6 +54,9 @@ return {
                 vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
                 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+                opts.desc = "Format code"
+                vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, opts)
             end,
         })
 
@@ -71,15 +77,15 @@ return {
         -- Set the diagnostic config with all icons
         vim.diagnostic.config({
             signs = {
-                text = signs -- Enable signs in the gutter
+                text = signs          -- Enable signs in the gutter
             },
-            virtual_text = true,  -- Specify Enable virtual text for diagnostics
-            underline = true,     -- Specify Underline diagnostics
-            update_in_insert = false,  -- Keep diagnostics active in insert mode
+            virtual_text = true,      -- Specify Enable virtual text for diagnostics
+            underline = true,         -- Specify Underline diagnostics
+            update_in_insert = false, -- Keep diagnostics active in insert mode
         })
 
 
-        -- NOTE : 
+        -- NOTE :
         -- Moved back from mason_lspconfig.setup_handlers from mason.lua file
         -- as mason setup_handlers is deprecated & its causing issues with lsp settings
         --
@@ -174,7 +180,5 @@ return {
                 },
             },
         })
-
-
     end,
 }

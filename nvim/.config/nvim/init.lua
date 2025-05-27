@@ -12,13 +12,18 @@ vim.keymap.set("n", "<C-t>", ":Neotree filesystem focus left<CR>")
 vim.api.nvim_create_autocmd("VimLeave", {
   pattern = "*",
   callback = function()
-    os.execute("tmux setw automatic-rename")
+    if os.getenv("TMUX") then
+        os.execute("tmux setw automatic-rename")
+    end
   end,
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
   callback = function()
+    if not os.getenv("TMUX") then
+        return
+    end
     local buftype = vim.api.nvim_get_option_value("buftype", { scope = "local" })
     local filename = vim.fn.expand("%:t")
 
