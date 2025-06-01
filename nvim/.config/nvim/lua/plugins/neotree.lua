@@ -7,4 +7,40 @@ return {
         "MunifTanjim/nui.nvim",
         -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
+    lazy = false, -- neo-tree will lazily load itself
+    ---@module "neo-tree"
+    config = function()
+        require("neo-tree").setup({
+            event_handlers = {
+
+                {
+                    event = "file_open_requested",
+                    handler = function()
+                        -- auto close
+                        -- vim.cmd("Neotree close")
+                        -- OR
+                        require("neo-tree.command").execute({ action = "close" })
+                    end
+                },
+
+            },
+            default_component_configs = {
+                git_status = {
+                    symbols = {
+                        -- Change type
+                        added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+                        modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+                        deleted = "", -- this can only be used in the git_status source
+                        renamed = "", -- this can only be used in the git_status source
+                        -- Status type
+                        untracked = "",
+                        ignored = "",
+                        unstaged = "",
+                        staged = "",
+                        conflict = "",
+                    },
+                }
+            }
+        })
+    end
 }

@@ -4,10 +4,11 @@ require("remaps")
 
 vim.opt.fillchars = { eob = " " }
 vim.g.mapleader = " "
+vim.opt.number = true
 vim.wo.relativenumber = true
-vim.cmd("set nu")
---vim.o.background = dark
-vim.keymap.set("n", "<C-t>", ":Neotree filesystem focus left<CR>")
+
+
+
 
 vim.api.nvim_create_autocmd("VimLeave", {
   pattern = "*",
@@ -32,6 +33,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.hl.on_yank({ higroup = 'YankHighlight', timeout = 150 })
+  end,
+})
+vim.api.nvim_set_hl(0, 'YankHighlight', { bg = '#332d42' })
+
 
 require("rose-pine").setup({
   variant = "main",     -- auto, main, moon, or dawn
